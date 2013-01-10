@@ -144,9 +144,14 @@ function logout()
 
 function output_foot()
 {
+	global $password;
 	echo '<br /><br />
-<footer>
-<a href="index.php?action=logout&logoutkey='.md5($_COOKIE["mytasks_pw"]).'">Logout</a> &bull; Powered by <a href="https://github.com/PenguinPaul/MyTasks">MyTasks</a> &copy; '.date("Y").' Paul Hedman &bull; <a href="https://github.com/PenguinPaul/MyTasks/wiki/Help">Help</a><br />
+<footer>';
+	if(isset($password) && $password != '')
+	{
+		echo '<a href="index.php?action=logout&logoutkey='.md5($_COOKIE["mytasks_pw"]).'">Logout</a> &bull; ';
+	}
+	echo 'Powered by <a href="https://github.com/PenguinPaul/MyTasks">MyTasks</a> &copy; '.date("Y").' Paul Hedman &bull; <a href="https://github.com/PenguinPaul/MyTasks/wiki/Help">Help</a><br />
 </footer>
 </body>
 </html>';

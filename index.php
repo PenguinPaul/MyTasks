@@ -8,7 +8,7 @@
 // GPL? LGPL? WTFPL? Dunno yet.
 
 define('WHATAMI','MyTasks');
-define('VERSION','0.1');
+define('VERSION','0.2.1');
 
 if(isset($_GET['intcheck']))
 {
@@ -109,8 +109,10 @@ if($_POST['action'] == 'addnew')
 	if(is_array($status))
 	{	
 		// O noes, an error!
-		var_dump($status);
-		exit;
+		output_head();
+		echo '<h4>An error has occured.</h4>';
+		echo $status[1];
+		output_foot();
 	} else {
 		// Hooray!
 		header('Location: index.php?add=success');
@@ -149,11 +151,6 @@ if($db->num_rows($query) == 0)
 
 	echo '</table>';
 }
-
-
-
-
-// Add a task!
 
 output_foot();
 ?>
