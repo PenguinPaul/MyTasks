@@ -15,10 +15,10 @@ if(!$db->table_exists('tasks'))
 	  `tid` int(11) NOT NULL AUTO_INCREMENT,
 	  `type` int(11) NOT NULL,
 	  `priority` int(11) NOT NULL,
-	  `name` text CHARACTER SET latin1 NOT NULL,
-	  `comments` text CHARACTER SET latin1 NOT NULL,
-	  `created` int(11) NOT NULL,
-	  `at` int(11) NOT NULL,
+	  `name` text CHARACTER SET utf8 NOT NULL,
+	  `comments` text CHARACTER SET utf8 NOT NULL,
+	  `time` TIME NOT NULL,
+	  `date` DATE NOT NULL,
 	  PRIMARY KEY (`tid`)
 	) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;");
 

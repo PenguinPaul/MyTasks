@@ -1,4 +1,6 @@
 $(document).ready(function() {
+
+	// New task slidedown menu
 	$('#addtask').click(function() {
 			$('#newtaskform').slideDown('slow', function() {
 			// Animation complete.
@@ -13,4 +15,19 @@ $(document).ready(function() {
 			$("#submitnew").attr('value','Add Appointment');
 		}
 	});
+
+
+	// Edit stuff!
+	$('.edit_name').editable('index.php?action=edit', {
+			//cancel    : 'Cancel',
+			//submit    : 'OK',
+			indicator : "<img src='images/indicator.gif'>",
+			event     : "dblclick",
+	});
+
+	$('.edit_comments').editable('index.php?action=edit', {
+			cancel    : 'Cancel',
+			submit    : 'OK',
+	});
+
 });

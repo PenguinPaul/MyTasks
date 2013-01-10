@@ -101,31 +101,59 @@ if(!$db->table_exists('tasks'))
 
 }
 
-output_head();
-
-// The main tasks page.
-if(!isset($_GET['action']) || $_GET['action'] == '')
+// Add a new task? :o
+if($_POST['action'] == 'addnew')
 {
-	$query = $db->simple_select('tasks','*');
+	$status = insert_task($_POST);
 
-	if($db->num_rows($query) == 0)
-	{
-		// Oh noes!  This person isn't doing anything!  They should make some cookies and mail them to me.  They can do so here: http://a1i.org/uIU5H
-		echo 'You currently have no tasks.  Why not add one?';
+	if(is_array($status))
+	{	
+		// O noes, an error!
+		var_dump($status);
+		exit;
 	} else {
-
-
-
+		// Hooray!
+		header('Location: index.php?add=success');
+		exit;
 	}
 }
 
-if($_POST['action'] == 'addnew')
+
+// Or maybe edit one?
+if($_POST['action'] == 'edit')
 {
-	var_dump($_POST);
-	$timeyay = $_POST['time'].' '.$_POST['date'];
-	echo '<br />'.$timeyay.' ' .strtotime($timeyay);
+	die('Is this working?');
 }
+
+output_head();
+
+// The main tasks page.
+$query = $db->simple_select('tasks','*');
+
+if($db->num_rows($query) == 0)
+{
+	// Oh noes!  This person isn't doing anything!  They should make some cookies and mail them to me.  They can do so here: http://a1i.org/uIU5H
+	echo 'You currently have no tasks.  Why not add one?';
+} else {
+	echo 'Double click any item to edit it.';
+	echo '<table>';
+
+	while($task = $db->fetch_array($query))
+	{
+		// Show the tasks!
+		echo '<tr>';
+		echo "<td id=\"name_{$task['tid']}\" class=\"edit_name\">{$task['name']}</td>";
+		echo "<span id=\"comments_{$task['tid']}\" class=\"edit_comments\">{$task['comments']}</span>";
+		echo '</tr>';
+	}
+
+	echo '</table>';
+}
+
+
+
 
 // Add a task!
 
-output_foot();?>
+output_foot();
+?>
